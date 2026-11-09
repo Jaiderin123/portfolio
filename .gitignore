@@ -1,0 +1,36 @@
+# --- Operating system ---
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# --- Editors and tools ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+
+# --- Backups and temporary files ---
+*.bak
+*.bak.*
+*.orig
+*.tmp
+*.log
+backup/
+*_backup*/
+
+# --- Dependencies and secrets (in case tooling is added later) ---
+node_modules/
+.env
+.env.*
+
+# --- Test screenshots ---
+*.screenshot.png
+
+# --- CV ---
+# The PDF in assets/cv/ IS published (the "Descargar CV" button needs it).
+# Uncomment the next line if you do not want to publish the plain-text CV
+# (cv.md includes the phone number):
+# assets/cv/cv.md

@@ -12,6 +12,9 @@ ehthumbs.db
 *~
 .claude/
 
+# --- Local Claude Code instructions (not published) ---
+CLAUDE.md
+
 # --- Backups and temporary files ---
 *.bak
 *.bak.*

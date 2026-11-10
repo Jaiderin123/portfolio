@@ -7,6 +7,11 @@ Bogotá, Colombia · Open to work (remote only)
 
 **https://jaiderin123.github.io/portfolio/**
 
+- English: https://jaiderin123.github.io/portfolio/en/
+- Español: https://jaiderin123.github.io/portfolio/es/
+
+The site is available in English and Spanish, with a language switch in the navbar.
+
 ## About
 
 Fullstack software engineer with experience in Java, Spring Boot and TypeScript on the backend, Angular and React on the frontend, and serverless and microservices architectures built under Clean Architecture, with extensive hands-on work in AWS, Docker and Kubernetes.

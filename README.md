@@ -13,8 +13,6 @@ Fullstack software engineer with experience in Java, Spring Boot and TypeScript 
 
 I integrate AI natively into my workflow with Kiro: spec-driven development, steering files, and agents that automate tasks, code reviews and testing. This speeds up delivery without sacrificing quality or control.
 
-I take pride in looking back at my journey: from SENA intern to professional senior developer.
-
 Currently working as a Senior Fullstack Developer at Digital Profit, on the Jelpit platform for Seguros Bolívar.
 
 ## Main stack

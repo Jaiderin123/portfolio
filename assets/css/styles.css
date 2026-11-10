@@ -406,11 +406,15 @@ a.client.ext-link:hover { border-color: var(--accent); background: color-mix(in 
 /* Avatar con giro 3D. "reveal" va en el contenedor exterior (.avatar-flip);
    el giro ocurre en .avatar-flip-inner, así los dos transform no se pisan. */
 .avatar-flip {
+  /* Tamaño y forma del avatar: cámbialos aquí.
+     Forma: 50% = círculo | 36px = cuadro con esquinas redondeadas */
+  --avatar-size: clamp(260px, 30vw, 360px);
+  --avatar-radius: 36px;
   justify-self: center;
-  width: 220px;
-  height: 220px;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
   perspective: 1000px;
-  border-radius: 50%;
+  border-radius: var(--avatar-radius);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -429,7 +433,7 @@ a.client.ext-link:hover { border-color: var(--accent); background: color-mix(in 
 .avatar-face {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  border-radius: var(--avatar-radius);
   border: 1px solid var(--border);
   background:
     linear-gradient(rgba(124, 92, 255, 0.12) 1px, transparent 1px),
@@ -888,7 +892,7 @@ footer .container { display: flex; justify-content: center; align-items: center;
   .hero .bio { margin-inline: auto; }
   .cta-row { justify-content: center; }
   .hero-now { justify-content: center; }
-  .avatar-flip { order: -1; width: 180px; height: 180px; }
+  .avatar-flip { order: -1; --avatar-size: min(72vw, 300px); }
   .skill-group { grid-template-columns: 1fr; gap: 16px; padding: 24px 0; }
   .bento { grid-template-columns: 1fr 1fr; }
 }

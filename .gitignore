@@ -32,6 +32,9 @@ node_modules/
 # --- Test screenshots ---
 *.screenshot.png
 
+# --- Heavy source images (kept locally; the optimized avatar.jpg is published) ---
+assets/images/avatar-original.png
+
 # --- CV ---
 # The PDF in assets/cv/ IS published (the "Descargar CV" button needs it).
 # Uncomment the next line if you do not want to publish the plain-text CV

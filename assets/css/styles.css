@@ -54,6 +54,9 @@ img { max-width: 100%; display: block; }
 ul, ol { list-style: none; }
 ::selection { background: var(--accent); color: #fff; }
 main:focus { outline: none; }
+/* Los globos de ayuda (::after, invisibles) de los enlaces cercanos al borde ensanchaban la página en
+   pantallas pequeñas. "clip" recorta ese desborde sin crear una zona de scroll. */
+main { overflow-x: clip; }
 
 /* Foco visible para teclado */
 :focus-visible {
@@ -303,6 +306,57 @@ a.client.ext-link:hover { border-color: var(--accent); background: color-mix(in 
 .theme-toggle .icon-moon { display: none; }
 [data-theme="light"] .theme-toggle .icon-sun { display: none; }
 [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+/* Texto del botón de tema (Claro/Oscuro · Light/Dark): solo desde 600px; en celulares queda el icono */
+.theme-label { display: none; }
+@media (min-width: 600px) {
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: auto;
+    height: 38px;
+    padding: 0 14px;
+    border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    font: 600 13px/1 var(--mono);
+    letter-spacing: 0.06em;
+    color: var(--text);
+    transition: color .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .theme-toggle .icon { color: var(--accent-soft); transition: color .2s ease; }
+  .theme-toggle:hover { color: #fff; background: var(--accent); border-color: var(--accent); }
+  .theme-toggle:hover .icon { color: #fff; }
+  .theme-toggle .label-to-light { display: inline; }
+  [data-theme="light"] .theme-toggle .label-to-light { display: none; }
+  [data-theme="light"] .theme-toggle .label-to-dark { display: inline; }
+}
+
+/* Cambio de idioma (ES / EN): píldora con icono de globo y el idioma al que se cambia */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  margin-left: 2px;
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  font: 600 13px/1 var(--mono);
+  letter-spacing: 0.06em;
+  color: var(--text);
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.lang-switch .icon { width: 16px; height: 16px; color: var(--accent-soft); transition: color .2s ease; }
+.lang-switch:hover {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.lang-switch:hover .icon { color: #fff; }
+.lang-code { display: none; }   /* el código (EN/ES) solo se usa en pantallas muy angostas */
 
 /* ==========================================================
    5. HERO (texto a la izquierda, avatar a la derecha)
@@ -918,12 +972,30 @@ footer .container { display: flex; justify-content: center; align-items: center;
   .card.wide, .card.tall { grid-column: auto; grid-row: auto; }
   .card.full { grid-column: auto; flex-direction: column; align-items: flex-start; gap: 14px; }
 }
-@media (max-width: 400px) {
-  /* Móviles estrechos (320–400px): la pastilla debe caber completa */
+@media (max-width: 519px) {
+  /* Celulares y tablets pequeñas: la píldora del idioma muestra solo la palabra (sin globo) */
+  .lang-switch { height: 36px; padding: 0 13px; margin-left: 0; font-size: 12px; }
+  .lang-switch .icon { display: none; }
+}
+
+@media (max-width: 460px) {
+  /* Navbar compacto para que quepa junto a la palabra completa del idioma */
   .nav { gap: 2px; padding: 5px; }
   .nav a.nav-item { padding: 12px 8px; }
   .nav-sep { display: none; }
   .theme-toggle { width: 34px; height: 34px; }
+  .lang-switch { height: 34px; padding: 0 11px; }
+}
+
+@media (max-width: 359px) {
+  /* En celulares muy angostos no cabe la palabra completa: solo el código (EN / ES) */
+  .lang-full { display: none; }
+  .lang-code { display: inline; }
+}
+
+@media (max-width: 400px) {
+  /* Pastilla de disponibilidad: texto algo más compacto para que el punto verde no quede solo en una línea */
+  .hero-badge { font-size: 11px; letter-spacing: 0.06em; padding: 7px 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

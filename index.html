@@ -1,509 +1,54 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jaider Betancur — Desarrollador Fullstack Senior</title>
-  <meta name="description" content="Portafolio de Jaider Betancur, desarrollador Fullstack Senior en Bogotá: Java, Spring Boot, TypeScript, Angular, React y AWS, con IA integrada en el flujo de desarrollo.">
+  <title>Jaider Betancur — Portfolio</title>
+  <meta name="description" content="Portfolio of Jaider Betancur, Senior Fullstack Developer. Available in English and Spanish. / Portafolio de Jaider Betancur, desarrollador Fullstack Senior, en español e inglés.">
   <meta name="theme-color" content="#050507">
-  <meta name="color-scheme" content="dark light">
 
-  <!-- Open Graph (añade og:image y og:url cuando tengas la URL final de GitHub Pages) -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Jaider Betancur — Desarrollador Fullstack Senior">
-  <meta property="og:description" content="Java, Spring Boot, TypeScript, Angular, React y AWS. Experiencia, habilidades y proyectos destacados.">
-  <meta property="og:locale" content="es_CO">
-
-  <!-- Favicon: símbolo de código </> en SVG embebido (sin archivos extra) -->
+  <!-- Raíz del sitio: redirige a /es/ o /en/ según el idioma recordado o el del navegador.
+       Los enlaces directos /es/ y /en/ nunca redirigen. -->
+  <link rel="canonical" href="https://jaiderin123.github.io/portfolio/">
+  <link rel="alternate" hreflang="es" href="https://jaiderin123.github.io/portfolio/es/">
+  <link rel="alternate" hreflang="en" href="https://jaiderin123.github.io/portfolio/en/">
+  <link rel="alternate" hreflang="x-default" href="https://jaiderin123.github.io/portfolio/">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C0C10'/%3E%3Crect x='1.5' y='1.5' width='61' height='61' rx='12.5' fill='none' stroke='%237C5CFF' stroke-opacity='.55' stroke-width='3'/%3E%3Cpath d='M23 22L13 32l10 10M41 22l10 10-10 10' fill='none' stroke='%23A795FF' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M35.5 17.5L28.5 46.5' stroke='%237C5CFF' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 
-  <!-- Tema + clase "js": se aplican antes del primer pintado (evita el destello de tema)
-       y permiten que el contenido sea visible si JavaScript falla -->
   <script>
     (function () {
-      var root = document.documentElement;
-      root.classList.add('js');
-      try {
-        var t = localStorage.getItem('theme');
-        if (t !== 'light' && t !== 'dark') {
-          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        }
-        root.setAttribute('data-theme', t);
-      } catch (e) { /* almacenamiento bloqueado: se queda en oscuro */ }
+      var lang = null;
+      try { lang = localStorage.getItem('lang'); } catch (e) {}
+      if (lang !== 'es' && lang !== 'en') {
+        var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+        lang = /^es/i.test(nav) ? 'es' : 'en';
+      }
+      // En file:// una carpeta no abre su index.html
+      location.replace(lang + '/' + (location.protocol === 'file:' ? 'index.html' : '') + location.search + location.hash);
     })();
   </script>
+  <noscript><meta http-equiv="refresh" content="0; url=es/"></noscript>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <!-- tsParticles (partículas conectadas en las secciones intermedias). Versión fija + SRI -->
-  <script defer src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" integrity="sha384-gZSNMuUgSbqcltOBBRNXCH+szg+2C69ISFyCk2w+xsZc0iFU+bIVPfYPmLwLtNzz" crossorigin="anonymous"></script>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 24px; background: #050507; color: #EDEDF2;
+           font-family: 'Inter', system-ui, -apple-system, sans-serif; text-align: center; }
+    h1 { font-size: clamp(26px, 5vw, 40px); letter-spacing: -0.02em; margin-bottom: 8px; }
+    p { color: #7A7A88; margin-bottom: 24px; }
+    .links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    a { padding: 13px 26px; border-radius: 999px; border: 1px solid #7C5CFF; color: #EDEDF2; text-decoration: none; font-weight: 600; transition: background .2s ease; }
+    a:hover, a:focus-visible { background: #7C5CFF; outline: none; }
+  </style>
 </head>
 <body>
-
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-  <!-- ========================================================
-       NAVEGACIÓN
-       ======================================================== -->
-  <nav class="nav" id="nav" aria-label="Principal">
-    <a href="#inicio" class="nav-item" data-link="inicio">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>
-      <span>Inicio</span>
-    </a>
-    <a href="#sobre-mi" class="nav-item" data-link="sobre-mi">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
-      <span>Sobre mí</span>
-    </a>
-    <a href="#experiencia" class="nav-item" data-link="experiencia">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
-      <span>Experiencia</span>
-    </a>
-    <a href="#habilidades" class="nav-item" data-link="habilidades">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-2.4z"/></svg>
-      <span>Habilidades</span>
-    </a>
-    <a href="#educacion" class="nav-item" data-link="educacion">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 12h-5m5-4h-5m9 9V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>
-      <span>Educación</span>
-    </a>
-    <!-- PROYECTOS_OCULTO (navbar): quita este comentario para mostrar el enlace
-    <a href="#proyectos" class="nav-item" data-link="proyectos">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      <span>Proyectos</span>
-    </a>
-    -->
-    <a href="#contacto" class="nav-item" data-link="contacto">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      <span>Contacto</span>
-    </a>
-
-    <span class="nav-sep" aria-hidden="true"></span>
-
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">
-      <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-    </button>
-  </nav>
-
-  <main id="contenido" tabindex="-1">
-
-    <!-- ========================================================
-         HERO
-         ======================================================== -->
-    <section class="hero" id="inicio">
-      <div id="line-waves-container" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div>
-          <!-- PASTILLA DE DISPONIBILIDAD: cambia los dos textos aquí abajo -->
-          <div class="hero-badge reveal">
-            <span class="dot" aria-hidden="true"></span>
-            <span class="main">Disponible para contratación</span> <!-- texto principal -->
-            <span class="sep" aria-hidden="true"></span>
-            <span class="sub">Solo modalidad remota</span> <!-- texto secundario -->
-          </div>
-          <span class="eyebrow reveal">Ingeniero de Software · Bogotá, Colombia</span>
-          <h1 class="reveal">Jaider <span class="accent">Betancur</span></h1>
-          <p class="hero-role reveal">Desarrollador Fullstack Senior</p>
-          <p class="bio reveal">
-            <strong>Convierto ideas en plataformas que escalan.</strong> Más de 5 años llevando a
-            producción sistemas de seguros y recaudo con <strong>Java</strong>, <strong>TypeScript</strong>,
-            <strong>Angular</strong>, <strong>React</strong> y <strong>AWS</strong>, y
-            potencio mi flujo con IA (<strong>Kiro</strong> y <strong>Claude Code</strong>) para entregar con mayor eficacia, sin perder criterio técnico ni calidad.
-          </p>
-          <div class="cta-row reveal">
-            <!-- CV: si cambias el PDF, actualiza el nombre en href (y "download" es el nombre con que se guarda) -->
-            <a href="assets/cv/jaider-betancur-ingeniero-software-cv-2026.pdf" class="btn btn-primary" download="CV-Jaider-Betancur.pdf">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
-              Descargar CV
-            </a>
-            <a href="#contacto" class="btn">Contáctame</a>
-          </div>
-          <p class="hero-now reveal"><span class="dot" aria-hidden="true"></span>Actualmente en <a class="ext-link" href="https://digitalprof-it.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Digital Profit, se abre en una nueva pestaña">Digital Profit</a> · <a class="ext-link" href="https://www.segurosbolivar.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Seguros Bolívar, se abre en una nueva pestaña">Seguros Bolívar</a></p>
-        </div>
-
-        <div class="avatar-flip reveal" id="avatarFlip" role="button" tabindex="0" aria-label="Ver efecto" aria-pressed="false">
-          <div class="avatar-flip-inner">
-            <div class="avatar-face avatar-face--front">
-              <img src="assets/images/avatar.jpg" alt="Foto de Jaider Betancur" width="220" height="220" decoding="async" fetchpriority="high"
-                   onerror="this.hidden=true;this.nextElementSibling.hidden=false;">
-              <span class="avatar-placeholder" aria-hidden="true" hidden>foto</span>
-            </div>
-            <div class="avatar-face avatar-face--back" aria-hidden="true">
-              <div class="crystalized-ball"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================
-         SOBRE MÍ (perfil profesional)
-         ======================================================== -->
-    <section id="sobre-mi">
-      <div class="particles-bg" id="particles-sobre-mi" style="position:absolute; inset:0; z-index:0; pointer-events:none;"></div>
-      <div class="container">
-        <div class="about-text">
-          <span class="eyebrow reveal">Sobre mí</span>
-          <h2 class="section-title reveal">Perfil <span class="accent">profesional</span></h2>
-          <p class="reveal">Soy ingeniero de software fullstack con experiencia en Java, Spring Boot y TypeScript en el backend, Angular y React en el frontend, y arquitecturas serverless y de microservicios bajo Clean Architecture y arquitectura hexagonal, con amplio manejo de AWS, Docker y Kubernetes.</p>
-          <p class="reveal">Integro la IA de forma nativa en mi flujo de trabajo, con herramientas como Kiro y Claude Code: desarrollo guiado por Specs y steering files en Kiro, planificación previa con el modo Plan de Claude Code, y agentes que automatizan tareas, code reviews y testing. Así acelero los ciclos de entrega sin sacrificar calidad ni control.</p>
-          <div class="tags reveal">
-            <span class="pill">Bogotá, Colombia</span>
-            <span class="pill">Español · Nativo</span>
-            <span class="pill">Inglés · Intermedio</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================
-         EXPERIENCIA
-         ======================================================== -->
-    <section id="experiencia">
-      <div class="particles-bg" id="particles-experiencia" style="position:absolute; inset:0; z-index:0; pointer-events:none;"></div>
-      <div class="container">
-        <span class="eyebrow reveal">Experiencia</span>
-        <h2 class="section-title reveal">Trayectoria</h2>
-
-        <ol class="timeline">
-          <li class="timeline-item">
-            <span class="date">Jul 2026 — Presente</span>
-            <h3>Desarrollador Fullstack Senior</h3>
-            <span class="company"><a class="org ext-link" href="https://digitalprof-it.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Digital Profit, se abre en una nueva pestaña">Digital Profit</a><a class="client ext-link" href="https://www.segurosbolivar.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Seguros Bolívar, se abre en una nueva pestaña">Seguros Bolívar</a><span class="place">Bogotá</span></span>
-            <p>Proyecto: <strong><a class="ext-link" href="https://www.jelpit.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página del proyecto" aria-label="Jelpit, se abre en una nueva pestaña">Jelpit</a></strong></p>
-            <p><strong>Jelpit Conjuntos</strong> y <strong>Jelpit Recaudador</strong>: plataforma digital de <a class="ext-link" href="https://www.segurosbolivar.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Seguros Bolívar, se abre en una nueva pestaña">Seguros Bolívar</a> para la gestión y el recaudo multicanal de copropiedades, colegios, gimnasios e inmobiliarias, en modernización para escalar a grandes corporaciones y al sector gobierno.</p>
-            <ul>
-              <li>Desarrollo funcionalidades fullstack con React, Angular, TypeScript y Node.js bajo una arquitectura de <strong>microfrontends</strong>.</li>
-              <li>Construyo el backend serverless sobre <strong>AWS Lambda</strong> con <strong>arquitectura hexagonal</strong> y persistencia en <strong>MongoDB</strong> (NoSQL), aplicando Clean Architecture, Clean Code y SOLID.</li>
-              <li>Trabajo con Lambda, ECS Fargate, Docker, CloudFront, S3, API Gateway y colas, con infraestructura como código en CloudFormation y <strong>Terraform</strong>.</li>
-              <li>Integro IA en el flujo de desarrollo con <strong>Kiro</strong> (Specs, steering files y agentes de code review y testing), conectado por MCP a GitHub, AWS y Jira.</li>
-              <li>Desarrollo el frontend a partir de diseños en <strong>Figma</strong>, conectándome a ellos con el Power de Figma de Kiro para acelerar el paso del diseño al código.</li>
-            </ul>
-          </li>
-          <li class="timeline-item">
-            <span class="date">Abr 2024 — May 2026</span>
-            <h3>Desarrollador de Software</h3>
-            <span class="company"><a class="org ext-link" href="https://ias.com.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="IAS Software, se abre en una nueva pestaña">IAS Software</a><a class="client ext-link" href="https://www.sura.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Seguros SURA, se abre en una nueva pestaña">Seguros SURA</a><span class="place">Remoto</span></span>
-            <p>Proyecto: <strong><span class="ext-link private-link" tabindex="0" data-tip="Este proyecto es privado, por lo cual no se puede enlazar">Core Pólizas de Seguros SURA<span class="sr-only"> (proyecto privado, sin enlace)</span></span></strong></p>
-            <p><strong>Core Pólizas de Seguros SURA</strong>: plataforma core de gestión de pólizas de Seguros SURA que cubre los ramos empresarial, vida, pensión, educación, salud y rentas, en modernización hacia una arquitectura de microservicios.</p>
-            <ul>
-              <li>Modernización de microservicios usando <strong>Java</strong>, Spring Boot y <strong>WebFlux</strong>, mejorando la capacidad de respuesta de los servicios en producción.</li>
-              <li>Diseño de sistemas <strong>idempotentes</strong> con capacidad para un <strong>alto flujo de usuarios</strong>, asegurando operaciones seguras ante reintentos.</li>
-              <li>Refactorización de código legado bajo principios de <strong>arquitectura hexagonal</strong>, reduciendo la deuda técnica y mejorando la mantenibilidad del sistema a largo plazo.</li>
-              <li>Automatización y gestión de pipelines <strong>CI/CD</strong> sobre AWS, Docker y <strong>EKS</strong>, contribuyendo a despliegues más estables y con menor intervención manual.</li>
-            </ul>
-          </li>
-          <li class="timeline-item">
-            <span class="date">Oct 2022 — Abr 2024</span>
-            <h3>Desarrollador de Software</h3>
-            <span class="company"><a class="org ext-link" href="https://ias.com.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="IAS Software, se abre en una nueva pestaña">IAS Software</a><a class="client ext-link" href="https://www.ingredion.com/sa/es-co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Ingredion, se abre en una nueva pestaña">Ingredion</a><span class="place">Remoto</span></span>
-            <p>Proyecto: <strong><span class="ext-link private-link" tabindex="0" data-tip="Este proyecto es privado, por lo cual no se puede enlazar">SIGLO<span class="sr-only"> (proyecto privado, sin enlace)</span></span></strong></p>
-            <p><strong>SIGLO</strong>: aplicativo privado de Ingredion que automatiza procesos y conecta servicios de terceros para la administración, logística, trazabilidad y finanzas, orientado al producto Bienestarina MAS, que la empresa elabora para el ICBF.</p>
-            <ul>
-              <li>Desarrollo fullstack desde cero usando <strong>Java/Spring Boot</strong> y <strong>Angular</strong>, automatizando procesos manuales de Excel y reduciendo errores operativos en la gestión de datos.</li>
-              <li>Integración con <strong>SAP</strong>, servidores <strong>SFTP</strong> y bases de datos transversales en <strong>Oracle (PL/SQL)</strong>, como las de portales gubernamentales, para módulos de reportes en SQL Server, habilitando la trazabilidad de datos entre sistemas dispares.</li>
-              <li>Desarrollo de módulos para el <strong>control y la trazabilidad financiera</strong> de las operaciones.</li>
-              <li>Gestión de despliegues en <strong>AWS</strong> con Docker y <strong>Kubernetes</strong>, apoyando la estabilidad del ambiente productivo del cliente.</li>
-            </ul>
-          </li>
-          <li class="timeline-item">
-            <span class="date">Feb 2022 — Oct 2022</span>
-            <h3>Aprendiz de Desarrollo de Software</h3>
-            <span class="company"><a class="org ext-link" href="https://ias.com.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="IAS Software, se abre en una nueva pestaña">IAS Software</a><span class="place">Remoto</span></span>
-            <p>Proyecto: <strong><a class="ext-link" href="https://houndter.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página del proyecto" aria-label="Houndter, se abre en una nueva pestaña">Houndter</a></strong></p>
-            <p><strong>Houndter</strong>: plataforma de analítica que extrae información de redes sociales para analizarla mediante análisis de sentimientos, transformando datos crudos en métricas accionables para estudios de mercado demográfico, marketing y estudios de negocios, entre otros usos.</p>
-            <ul>
-              <li>Desarrollo de un aplicativo de <strong>análisis de sentimientos</strong> para estudios de mercado demográfico, transformando datos crudos en métricas accionables.</li>
-              <li>Administración de infraestructura cloud en <strong>AWS</strong> (S3, ECS, EC2).</li>
-              <li>Configuración de flujos <strong>CI/CD</strong>, adquiriendo experiencia práctica en ambientes de producción reales.</li>
-              <li>Integración a equipos de desarrollo ágil, apoyando la construcción de funcionalidades backend y ganando exposición a flujos de trabajo reales de ingeniería de software.</li>
-            </ul>
-          </li>
-          <li class="timeline-item">
-            <span class="date">Ago 2021 — Feb 2022</span>
-            <h3>Practicante</h3>
-            <span class="company"><span class="org"><a class="ext-link" href="https://ias.com.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="IAS Software, se abre en una nueva pestaña">IAS Software</a> (<a class="ext-link" href="https://www.sena.edu.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la institución" aria-label="SENA, se abre en una nueva pestaña">SENA</a>)</span><span class="place">Remoto</span></span>
-            <p>Proyecto: <strong><a class="ext-link" href="https://www.telliou.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página del proyecto" aria-label="Telliou, se abre en una nueva pestaña">Telliou</a></strong></p>
-            <p><strong>Telliou</strong>: asistente virtual de agendamiento basado en árboles de decisión, que automatiza la interacción con los usuarios.</p>
-            <ul>
-              <li>Desarrollo de funciones lógicas para un <strong>chatbot de agendamiento</strong> basado en árboles de decisión, mejorando la automatización de interacciones con usuarios.</li>
-              <li>Gestión de despliegues continuos mediante pipelines <strong>CI/CD</strong> sobre infraestructura AWS, afianzando buenas prácticas de entrega de software.</li>
-              <li>Primeros pasos en entornos de desarrollo profesional, contribuyendo a proyectos reales desde etapas tempranas.</li>
-              <li>Consolidación de fundamentos de arquitectura de software, automatización y despliegue en cloud.</li>
-            </ul>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ========================================================
-         HABILIDADES
-         ======================================================== -->
-    <section id="habilidades">
-      <div class="particles-bg" id="particles-habilidades" style="position:absolute; inset:0; z-index:0; pointer-events:none;"></div>
-      <div class="container">
-        <span class="eyebrow reveal">Habilidades</span>
-        <h2 class="section-title reveal">Conocimientos</h2>
-        <p class="section-desc reveal">Desarrollo de principio a fin, de la base de datos a la nube. Diseño y construyo servicios backend, interfaces web e infraestructura como código, aplicando Clean Architecture y CI/CD, y apoyo mi flujo de trabajo en herramientas de IA como Kiro y Claude Code para entregar más rápido sin perder calidad ni control.</p>
-
-        <div class="skill-groups">
-        <div class="skill-group">
-          <h3>Backend</h3>
-          <ul class="skill-items">
-            <li class="skill-item" tabindex="0" data-tip="Java 17 / 21 / 25"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/java.svg" alt="" width="24" height="24" loading="lazy"></span>Java<span class="sr-only"> (versiones 17, 21 y 25)</span></li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/spring-boot.svg" alt="" width="24" height="24" loading="lazy"></span>Spring Boot</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/spring-webflux.svg" alt="" width="24" height="24" loading="lazy"></span>Spring WebFlux</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/spring-security.svg" alt="" width="24" height="24" loading="lazy"></span>Spring Security</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/nodejs.svg" alt="" width="24" height="24" loading="lazy"></span>Node.js</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/typescript.svg" alt="" width="24" height="24" loading="lazy"></span>TypeScript</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/graphql.svg" alt="" width="24" height="24" loading="lazy"></span>GraphQL</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/rest-api.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>REST APIs</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/rabbitmq.svg" alt="" width="24" height="24" loading="lazy"></span>RabbitMQ</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/backend/kafka.svg" alt="" class="invert-light" width="24" height="24" loading="lazy"></span>Apache Kafka</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>Frontend</h3>
-          <ul class="skill-items">
-            <li class="skill-item" tabindex="0" data-tip="Angular 14 / 17 / 21"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/angular.svg" alt="" width="24" height="24" loading="lazy"></span>Angular<span class="sr-only"> (versiones 14, 17 y 21)</span></li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/react.svg" alt="" width="24" height="24" loading="lazy"></span>React</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/ionic.svg" alt="" width="24" height="24" loading="lazy"></span>Ionic</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/typescript.svg" alt="" width="24" height="24" loading="lazy"></span>TypeScript</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/javascript.svg" alt="" width="24" height="24" loading="lazy"></span>JavaScript</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/frontend/figma.svg" alt="" width="24" height="24" loading="lazy"></span>Figma (handoff)</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>IA y herramientas</h3>
-          <ul class="skill-items">
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/ai/kiro.svg" alt="" class="invert-light" width="24" height="24" loading="lazy"></span>Kiro</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/ai/claude.svg" alt="" width="24" height="24" loading="lazy"></span>Claude Code</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/ai/mcp.svg" alt="" class="invert-light" width="24" height="24" loading="lazy"></span>MCP</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/ai/prompt.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Prompt Engineering</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/ai/llm.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>LLMs</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>Cloud y DevOps</h3>
-          <ul class="skill-items">
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/aws-lambda.svg" alt="" width="24" height="24" loading="lazy"></span>AWS Lambda</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/ecs-fargate.svg" alt="" width="24" height="24" loading="lazy"></span>ECS Fargate</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/api-gateway.svg" alt="" width="24" height="24" loading="lazy"></span>API Gateway</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/cloudfront.svg" alt="" width="24" height="24" loading="lazy"></span>CloudFront</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/s3.svg" alt="" width="24" height="24" loading="lazy"></span>S3</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/sqs.svg" alt="" width="24" height="24" loading="lazy"></span>SQS</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/sns.svg" alt="" width="24" height="24" loading="lazy"></span>SNS</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/alb.svg" alt="" width="24" height="24" loading="lazy"></span>ALB</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/cloudwatch.svg" alt="" width="24" height="24" loading="lazy"></span>CloudWatch</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/iam.svg" alt="" width="24" height="24" loading="lazy"></span>IAM</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/docker.svg" alt="" width="24" height="24" loading="lazy"></span>Docker</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/kubernetes.svg" alt="" width="24" height="24" loading="lazy"></span>Kubernetes</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/cicd.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>CI/CD</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/terraform.svg" alt="" width="24" height="24" loading="lazy"></span>Terraform</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/cloud/cloudformation.svg" alt="" width="24" height="24" loading="lazy"></span>CloudFormation</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>Bases de datos</h3>
-          <ul class="skill-items">
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/database/postgresql.svg" alt="" width="24" height="24" loading="lazy"></span>PostgreSQL</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/database/sqlserver.svg" alt="" width="24" height="24" loading="lazy"></span>SQL Server</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/database/mysql.svg" alt="" width="24" height="24" loading="lazy"></span>MySQL</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/database/plsql.svg" alt="" width="24" height="24" loading="lazy"></span>PL/SQL</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/database/mongodb.svg" alt="" width="24" height="24" loading="lazy"></span>MongoDB</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/database/redis.svg" alt="" width="24" height="24" loading="lazy"></span>Redis</li>
-          </ul>
-        </div>
-        <div class="skill-group">
-          <h3>Arquitectura y calidad</h3>
-          <ul class="skill-items">
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/clean-architecture.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Clean Architecture</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/hexagonal-architecture.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Arquitectura hexagonal</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/microservices.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Microservicios</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/microfrontends.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Microfrontends</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/serverless.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Serverless</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/solid.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>SOLID</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/clean-code.svg" alt="" class="tone" width="24" height="24" loading="lazy"></span>Clean Code</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/junit5.svg" alt="" width="24" height="24" loading="lazy"></span>JUnit 5</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/sonarqube.svg" alt="" width="24" height="24" loading="lazy"></span>SonarQube</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/git.svg" alt="" width="24" height="24" loading="lazy"></span>Git</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/github.svg" alt="" class="invert-light" width="24" height="24" loading="lazy"></span>GitHub</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/architecture/nginx.svg" alt="" width="24" height="24" loading="lazy"></span>Nginx</li>
-          </ul>
-        </div>
-
-        <div class="skill-group">
-          <h3>Gestión y colaboración</h3>
-          <ul class="skill-items">
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/management/jira.svg" alt="" width="24" height="24" loading="lazy"></span>Jira</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/management/azure-devops.svg" alt="" width="24" height="24" loading="lazy"></span>Azure DevOps</li>
-            <li class="skill-item"><span class="skill-icon" aria-hidden="true"><img src="assets/icons/management/confluence.svg" alt="" width="24" height="24" loading="lazy"></span>Confluence</li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================
-         CERTIFICACIONES
-         ======================================================== -->
-    <section id="educacion">
-      <div class="particles-bg" id="particles-educacion" style="position:absolute; inset:0; z-index:0; pointer-events:none;"></div>
-      <div class="container">
-        <span class="eyebrow reveal">Educación</span>
-        <h2 class="section-title reveal">Formación <span class="accent">continua</span></h2>
-        <p class="section-desc reveal">Educación formal y cursos que respaldan mi trayectoria.</p>
-
-        <div class="cert-cols">
-          <div class="cert-col">
-            <h3 class="cert-col-title">Educación formal</h3>
-            <ul class="cert-list">
-            <li class="cert"><div><h4>Ingeniero de Software</h4><p><a class="ext-link" href="https://www.poli.edu.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la institución" aria-label="Politécnico GranColombiano, se abre en una nueva pestaña">Politécnico GranColombiano</a> · Remoto</p></div><span class="year">2025</span></li>
-            <li class="cert"><div><h4>Tecnólogo en Análisis y Desarrollo de Sistemas Informáticos</h4><p><a class="ext-link" href="https://www.sena.edu.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la institución" aria-label="SENA, se abre en una nueva pestaña">SENA</a> · Remoto</p></div><span class="year">2022</span></li>
-            <li class="cert"><div><h4>Técnico Bachiller en Desarrollo de Software</h4><p><a class="ext-link" href="https://www.sena.edu.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la institución" aria-label="SENA, se abre en una nueva pestaña">SENA</a> · Medellín, Antioquia</p></div><span class="year">2019</span></li>
-            </ul>
-          </div>
-
-          <div class="cert-col">
-            <h3 class="cert-col-title">Cursos</h3>
-            <ul class="cert-list">
-            <li class="cert"><div><h4><a class="ext-link" href="https://www.udemy.com/certificate/UC-aaa265d6-d7c0-42f2-9a07-131489fbc5a5/" target="_blank" rel="noopener noreferrer" data-tip="Ver certificado" aria-label="Arquitectura de Software Moderna, ver certificado en Udemy, se abre en una nueva pestaña">Arquitectura de Software Moderna</a></h4><p>Udemy · Certificación</p></div><span class="year">2026</span></li>
-            <li class="cert"><div><h4><a class="ext-link" href="https://www.udemy.com/certificate/UC-e0116a24-e443-4026-993d-dbd33b5c2b18/" target="_blank" rel="noopener noreferrer" data-tip="Ver certificado" aria-label="Master en Spring WebFlux y Programación Reactiva, ver certificado en Udemy, se abre en una nueva pestaña">Master en Spring WebFlux y Programación Reactiva</a></h4><p>Udemy · Certificación</p></div><span class="year">2026</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================================
-         PROYECTOS — OCULTO POR AHORA
-         Para mostrarlo: borra este comentario, el del navbar y el del
-         directorio de la sección de contacto (busca "PROYECTOS_OCULTO")
-         ======================================================== PROYECTOS_OCULTO
-    <section id="proyectos">
-      <div class="particles-bg" id="particles-proyectos" style="position:absolute; inset:0; z-index:0; pointer-events:none;"></div>
-      <div class="container">
-        <span class="eyebrow reveal">Proyectos</span>
-        <h2 class="section-title reveal">Trabajo <span class="accent">destacado</span></h2>
-        <p class="section-desc reveal">Plataformas reales en producción, desde sistemas de recaudo hasta aplicativos core de seguros.</p>
-
-        <div class="bento">
-          <article class="card wide">
-            <div class="thumb" aria-hidden="true">[ captura: Jelpit ]</div>
-            <h3>Jelpit Conjuntos y Jelpit Recaudador</h3>
-            <p>Plataforma digital de <a class="ext-link" href="https://www.segurosbolivar.com/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Seguros Bolívar, se abre en una nueva pestaña">Seguros Bolívar</a> para administrar y recaudar en copropiedades, colegios, gimnasios e inmobiliarias: reservas de zonas comunes, gestión documental, matrículas, arriendos y recaudo multicanal (PSE, tarjeta, corresponsales bancarios). Desarrollo fullstack y arquitectura serverless en AWS.</p>
-            <div class="tags">
-              <span class="pill">React</span>
-              <span class="pill">Angular</span>
-              <span class="pill">AWS Lambda</span>
-              <span class="pill">Terraform</span>
-            </div>
-          </article>
-
-          <article class="card tall">
-            <div class="thumb lg" aria-hidden="true">[ captura: SIGLO ]</div>
-            <h3>SIGLO</h3>
-            <p>Aplicativo de administración, logística, trazabilidad y finanzas construido desde cero para <a class="ext-link" href="https://www.ingredion.com/sa/es-co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="Ingredion, se abre en una nueva pestaña">Ingredion</a>, orientado al producto Bienestarina MAS que la empresa elabora para el ICBF. Automatizó procesos manuales en Excel y redujo los errores operativos en la gestión de datos.</p>
-            <div class="tags">
-              <span class="pill">Java</span>
-              <span class="pill">Spring Boot</span>
-              <span class="pill">Angular</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="metric">5<small>+ años</small></div>
-            <p>De experiencia construyendo software fullstack en producción, de practicante del SENA a desarrollador senior.</p>
-          </article>
-
-          <article class="card">
-            <div class="thumb sm" aria-hidden="true">[ captura: pólizas ]</div>
-            <h3>Modernización de pólizas</h3>
-            <p>Microservicios core de pólizas (empresarial, vida, pensión, educación) modernizados para <a class="ext-link" href="https://www.sura.co/" target="_blank" rel="noopener noreferrer" data-tip="Ir a la página de la empresa" aria-label="SURA, se abre en una nueva pestaña">SURA</a>.</p>
-            <div class="tags">
-              <span class="pill">Java 21</span>
-              <span class="pill">WebFlux</span>
-            </div>
-          </article>
-
-          <article class="card full">
-            <div class="metric">2<small>clientes</small></div>
-            <p>Con pipelines CI/CD sobre AWS, Docker y Kubernetes que administré y que dieron soporte a sus productos en producción.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-    -->
-
-    <!-- ========================================================
-         CONTACTO
-         ======================================================== -->
-    <section id="contacto" class="contact">
-      <div class="container">
-        <span class="eyebrow reveal">Contacto</span>
-        <h2 class="section-title reveal">¿Buscas un <span class="accent">Desarrollador Senior</span> para tu equipo?</h2>
-        <p class="section-desc reveal">Estoy abierto a conversar sobre nuevas oportunidades. Escríbeme o conectemos en LinkedIn y coordinamos una llamada para conocer el rol y el equipo.</p>
-        <div class="terminal reveal" role="group" aria-label="Terminal de contacto">
-          <div class="terminal-bar">
-            <span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span class="term-title">~/contacto/info</span>
-          </div>
-
-          <div class="terminal-body">
-            <div class="term-cols">
-              <nav class="term-col term-dir" aria-label="Directorio">
-                <h3><span class="ps">&gt;</span>ls ~/directorio</h3>
-                <ol class="dir-list">
-                  <li><a href="#inicio"><span class="n">01.</span><span class="name">INICIO</span><span class="dash" aria-hidden="true">—</span></a></li>
-                  <li><a href="#sobre-mi"><span class="n">02.</span><span class="name">SOBRE MÍ</span><span class="dash" aria-hidden="true">—</span></a></li>
-                  <li><a href="#experiencia"><span class="n">03.</span><span class="name">EXPERIENCIA</span><span class="dash" aria-hidden="true">—</span></a></li>
-                  <li><a href="#habilidades"><span class="n">04.</span><span class="name">HABILIDADES</span><span class="dash" aria-hidden="true">—</span></a></li>
-                  <li><a href="#educacion"><span class="n">05.</span><span class="name">EDUCACIÓN</span><span class="dash" aria-hidden="true">—</span></a></li>
-                  <!-- PROYECTOS_OCULTO (directorio): quita este comentario junto con el de la sección
-                  <li><a href="#proyectos"><span class="n">06.</span><span class="name">PROYECTOS</span><span class="dash" aria-hidden="true">—</span></a></li>
-                  -->
-                </ol>
-              </nav>
-
-              <div class="term-col term-sys">
-                <h3><span class="ps">&gt;</span>ls ~/contactos</h3>
-                <dl class="sys-list">
-                  <div class="sys-row"><dt>Correo</dt><dd><a href="mailto:torrezjaider10@gmail.com">torrezjaider10@gmail.com<svg class="icon arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></dd></div>
-                  <div class="sys-row"><dt>GitHub</dt><dd><a href="https://github.com/Jaiderin123" target="_blank" rel="noopener noreferrer">github.com/Jaiderin123<svg class="icon arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></dd></div>
-                  <div class="sys-row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/jaiderbt" target="_blank" rel="noopener noreferrer">linkedin.com/in/jaiderbt<svg class="icon arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></dd></div>
-                  <div class="sys-row"><dt>Ubicación</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Bogot%C3%A1%2C+Colombia" target="_blank" rel="noopener noreferrer" aria-label="Bogotá, Colombia, ver en Google Maps, se abre en una nueva pestaña">Bogotá, Colombia<svg class="icon arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></a></dd></div>
-                </dl>
-              </div>
-            </div>
-
-            <div class="term-prompt">
-              <p class="cmd"><span class="ps">&gt;</span><span class="cursor" aria-hidden="true"></span></p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      <span>© 2026 Jaider Betancur</span>
-      <span class="status-sep" aria-hidden="true">·</span>
-      <span class="online"><span class="online-dot" aria-hidden="true"></span>OpenToWork · Only Remote</span>
+  <main>
+    <h1>Jaider Betancur</h1>
+    <p>Senior Fullstack Developer</p>
+    <div class="links">
+      <a href="es/" hreflang="es" lang="es">Español</a>
+      <a href="en/" hreflang="en" lang="en">English</a>
     </div>
-  </footer>
-
-  <!-- ========================================================
-       JAVASCRIPT
-       ======================================================== -->
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/hero-lines.js"></script>
-  <script src="assets/js/particles.js"></script>
-  <script src="assets/js/avatar.js"></script>
+  </main>
 </body>
 </html>

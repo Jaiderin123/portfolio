@@ -3,6 +3,13 @@
 
 const root = document.documentElement;
 
+// Idioma de la página (<html lang="es|en">) y textos que genera el JavaScript
+const LANG = root.lang === 'en' ? 'en' : 'es';
+const TEXT = {
+  es: { themeToLight: 'Cambiar a tema claro', themeToDark: 'Cambiar a tema oscuro' },
+  en: { themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme' },
+}[LANG];
+
 // 1. Animaciones de aparición al hacer scroll
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -67,7 +74,7 @@ const themeToggle = document.getElementById('themeToggle');
 
 function updateThemeLabel() {
   const isLight = root.getAttribute('data-theme') === 'light';
-  themeToggle.setAttribute('aria-label', isLight ? 'Cambiar a tema oscuro' : 'Cambiar a tema claro');
+  themeToggle.setAttribute('aria-label', isLight ? TEXT.themeToDark : TEXT.themeToLight);
 }
 updateThemeLabel();
 
@@ -92,5 +99,22 @@ if (window.matchMedia('(hover: hover)').matches) {
         frame = 0;
       });
     });
+  });
+}
+
+// 5. Cambio de idioma (ES / EN): lleva a la misma sección en el otro idioma y recuerda la elección
+const langSwitch = document.getElementById('langSwitch');
+if (langSwitch) {
+  // Con file:// (abrir el archivo directamente) una carpeta no carga su index.html
+  const base = langSwitch.getAttribute('href') + (location.protocol === 'file:' ? 'index.html' : '');
+  const syncHref = () => {
+    const section = typeof shownId === 'string' && shownId !== 'inicio' ? '#' + shownId : '';
+    langSwitch.setAttribute('href', base + section);
+  };
+  syncHref();
+  ['pointerenter', 'focus', 'touchstart'].forEach((ev) => langSwitch.addEventListener(ev, syncHref, { passive: true }));
+  langSwitch.addEventListener('click', () => {
+    syncHref();
+    try { localStorage.setItem('lang', langSwitch.getAttribute('hreflang')); } catch (e) { /* sin almacenamiento */ }
   });
 }

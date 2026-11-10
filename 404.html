@@ -158,10 +158,10 @@
 </head>
 <body>
   <main>
-    <span class="eyebrow">Error</span>
+    <span class="eyebrow" id="t-eyebrow">Error</span>
     <p class="code" aria-hidden="true">404</p>
-    <h1>Esta página no existe</h1>
-    <p class="desc">La ruta que buscas no existe o fue movida. Vuelve al inicio para ver mi portafolio.</p>
+    <h1 id="t-title">Esta página no existe</h1>
+    <p class="desc" id="t-desc">La ruta que buscas no existe o fue movida. Vuelve al inicio para ver mi portafolio.</p>
 
     <div class="terminal" aria-hidden="true">
       <div><span class="prompt">&gt;</span> cd <span id="path">/ruta</span></div>
@@ -187,7 +187,30 @@
       var isGithubHost = /\.github\.io$/.test(location.hostname);
       root = (isGithubHost && first) ? '/' + first + '/' : '/';
     }
-    document.getElementById('home').setAttribute('href', root);
+    // Idioma: el de la carpeta que se pidió (/es/... o /en/...); si no, el recordado o el del navegador
+    var lang = /\/en(\/|$)/.test(location.pathname) ? 'en' : /\/es(\/|$)/.test(location.pathname) ? 'es' : null;
+    if (!lang) {
+      try { lang = localStorage.getItem('lang'); } catch (e) {}
+      if (lang !== 'es' && lang !== 'en') {
+        var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'es';
+        lang = /^es/i.test(nav) ? 'es' : 'en';
+      }
+    }
+    var T = {
+      es: { title: '404 — Página no encontrada | Jaider Betancur', eyebrow: 'Error', h1: 'Esta página no existe',
+            desc: 'La ruta que buscas no existe o fue movida. Vuelve al inicio para ver mi portafolio.', home: '← Volver al inicio' },
+      en: { title: '404 — Page not found | Jaider Betancur', eyebrow: 'Error', h1: 'This page does not exist',
+            desc: 'The page you are looking for does not exist or has moved. Go back home to see my portfolio.', home: '← Back to home' }
+    }[lang];
+    document.documentElement.lang = lang;
+    document.title = T.title;
+    document.getElementById('t-eyebrow').textContent = T.eyebrow;
+    document.getElementById('t-title').textContent = T.h1;
+    document.getElementById('t-desc').textContent = T.desc;
+    var home = document.getElementById('home');
+    home.textContent = T.home;
+    // Lleva al portafolio en el mismo idioma (en file:// una carpeta no abre su index.html)
+    home.setAttribute('href', root + lang + '/' + (location.protocol === 'file:' ? 'index.html' : ''));
   </script>
 </body>
 </html>

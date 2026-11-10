@@ -355,7 +355,7 @@ function initAvatarFlip() {
     enabled = true;
     root.setAttribute('role', 'button');
     root.setAttribute('tabindex', '0');
-    root.setAttribute('aria-label', 'Ver efecto');
+    root.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'View effect' : 'Ver efecto');
     root.setAttribute('aria-pressed', 'false');
     root.addEventListener('click', onClick);
     root.addEventListener('keydown', onKey);
